@@ -18,9 +18,8 @@ public class Budget {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "user_id")
+    private Integer userId;
 
     @Column(name = "amount")
     private Integer amount;
@@ -66,12 +65,12 @@ public class Budget {
         this.amount = amount;
     }
 
-    public User getUser() {
-        return user;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Category getCategory() {
@@ -90,10 +89,10 @@ public class Budget {
         this.id = id;
     }
 
-    public Budget(Integer id, Category category, User user, Integer amount, String budgetTime, Instant createAt, Instant updateAt) {
+    public Budget(Integer id, Category category, Integer userId, Integer amount, String budgetTime, Instant createAt, Instant updateAt) {
         this.id = id;
         this.category = category;
-        this.user = user;
+        this.userId = userId;
         this.amount = amount;
         this.budgetTime = budgetTime;
         this.createAt = createAt;

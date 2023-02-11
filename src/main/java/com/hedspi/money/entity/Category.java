@@ -14,9 +14,8 @@ public class Category {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "user_id")
+    private Integer userId;
 
     @Column(name = "name", length = 50)
     private String name;
@@ -65,12 +64,12 @@ public class Category {
         this.name = name;
     }
 
-    public User getUser() {
-        return user;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Integer getId() {
@@ -89,9 +88,9 @@ public class Category {
         this.type = type;
     }
 
-    public Category(Integer id, User user, String name, String icon, Integer type, Instant createAt, Instant updateAt) {
+    public Category(Integer id, Integer userId, String name, String icon, Integer type, Instant createAt, Instant updateAt) {
         this.id = id;
-        this.user = user;
+        this.userId = userId;
         this.name = name;
         this.icon = icon;
         this.type = type;

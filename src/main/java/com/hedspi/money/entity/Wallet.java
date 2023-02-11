@@ -15,9 +15,8 @@ public class Wallet {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "user_id")
+    private Integer userId;
 
     @Column(name = "amount")
     private Integer amount;
@@ -63,12 +62,12 @@ public class Wallet {
         this.amount = amount;
     }
 
-    public User getUser() {
-        return user;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Integer getId() {
@@ -79,9 +78,9 @@ public class Wallet {
         this.id = id;
     }
 
-    public Wallet(Integer id, User user, Integer amount, String walletName, Instant createAt, Instant updateAt) {
+    public Wallet(Integer id, Integer userId, Integer amount, String walletName, Instant createAt, Instant updateAt) {
         this.id = id;
-        this.user = user;
+        this.userId = userId;
         this.amount = amount;
         this.walletName = walletName;
         this.createAt = createAt;
