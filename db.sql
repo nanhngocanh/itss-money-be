@@ -51,19 +51,19 @@ CREATE TABLE IF NOT EXISTS `category` (
   CONSTRAINT `FK_c_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf32 COLLATE=utf32_vietnamese_ci;
 
--- Dumping data for table money.category: ~9 rows (approximately)
+-- Dumping data for table money.category: ~14 rows (approximately)
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
 INSERT INTO `category` (`id`, `user_id`, `name`, `icon`, `type`, `create_at`, `update_at`) VALUES
-	(1, NULL, 'Ăn uống', 'coffee', 0, '2023-02-10 16:20:51', '2023-02-10 16:55:14'),
-	(2, NULL, 'Chi tiêu hàng ngày', 'shopping-cart', 0, '2023-02-10 16:21:14', '2023-02-10 16:46:51'),
-	(3, NULL, 'Quần áo', 'skin', 0, '2023-02-10 16:21:20', '2023-02-10 16:46:16'),
+	(1, NULL, 'Ăn uống', 'coffee', -1, '2023-02-10 16:20:51', '2023-02-11 10:26:18'),
+	(2, NULL, 'Chi tiêu hàng ngày', 'shopping-cart', -1, '2023-02-10 16:21:14', '2023-02-11 10:26:22'),
+	(3, NULL, 'Quần áo', 'skin', -1, '2023-02-10 16:21:20', '2023-02-11 10:26:25'),
 	(4, NULL, 'Tiền lãi', 'bank', 1, '2023-02-10 16:44:32', '2023-02-10 16:57:45'),
-	(5, NULL, 'Đi lại', 'car', 0, '2023-02-10 16:21:38', '2023-02-10 16:48:40'),
-	(6, NULL, 'Y tế', 'medicine-bo', 0, '2023-02-10 16:21:50', '2023-02-10 16:58:10'),
-	(7, NULL, 'Giáo dục', 'read', 0, '2023-02-10 16:22:04', '2023-02-10 17:02:46'),
-	(8, NULL, 'Tiền nhà', 'home', 0, '2023-02-10 16:22:14', '2023-02-10 16:54:06'),
-	(9, NULL, 'Phí liên lạc', 'phone', 0, '2023-02-10 16:22:25', '2023-02-10 17:02:10'),
-	(10, NULL, 'Trả nợ', 'dollar-circle', 0, '2023-02-10 16:43:09', '2023-02-10 16:54:52'),
+	(5, NULL, 'Đi lại', 'car', -1, '2023-02-10 16:21:38', '2023-02-11 10:26:28'),
+	(6, NULL, 'Y tế', 'medicine-bo', -1, '2023-02-10 16:21:50', '2023-02-11 10:26:30'),
+	(7, NULL, 'Giáo dục', 'read', -1, '2023-02-10 16:22:04', '2023-02-11 10:26:32'),
+	(8, NULL, 'Tiền nhà', 'home', -1, '2023-02-10 16:22:14', '2023-02-11 10:26:35'),
+	(9, NULL, 'Phí liên lạc', 'phone', -1, '2023-02-10 16:22:25', '2023-02-11 10:26:37'),
+	(10, NULL, 'Trả nợ', 'dollar-circle', -1, '2023-02-10 16:43:09', '2023-02-11 10:26:39'),
 	(11, NULL, 'Tiền lương', 'wallet', 1, '2023-02-10 16:43:22', '2023-02-10 17:00:51'),
 	(12, NULL, 'Tiền phụ cấp', 'send', 1, '2023-02-10 16:43:39', '2023-02-10 17:01:20'),
 	(13, NULL, 'Tiền thưởng', 'gift', 1, '2023-02-10 16:43:47', '2023-02-10 16:59:28'),
