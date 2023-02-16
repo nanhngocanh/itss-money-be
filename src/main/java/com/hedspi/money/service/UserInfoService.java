@@ -17,4 +17,8 @@ public class UserInfoService {
     public void save(UserInfo userInfo) {
         userInfoRepository.save(userInfo);
     }
+
+    public void delete(UserInfo userInfo) {
+        userInfoRepository.delete(userInfo);
+    }
 }

@@ -51,4 +51,15 @@ public class UserTest {
             return ResponseEntity.ok("{\"message\": \"Update successfully\"}");
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteUserInfo(@PathVariable("id") int id) {
+        UserInfo userInfo = userInfoService.getUserInfoById(id);
+        if (userInfo == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            userInfoService.delete(userInfo);
+            return ResponseEntity.ok("{\"message\": \"Delete successfully\"}");
+        }
+    }
 }
