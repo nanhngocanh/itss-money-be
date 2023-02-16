@@ -126,4 +126,15 @@ public class UserInfo {
 
     public UserInfo() {
     }
+
+    public String toJsonString() {
+        String result = "{";
+        result += "\"id\":" + id + ",";
+        result += "\"firstName\":" + firstName + ",";
+        result += "\"lastName\":" + lastName + ",";
+        result += "\"sex\":" + sex + ",";
+        result += "\"phoneNumber\":" + phoneNumber + ",";
+        result += "}";
+        return result;
+    }
 }

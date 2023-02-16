@@ -1,0 +1,16 @@
+version: '3'
+services:
+  dbitss:
+    container_name: mysql
+    image: mysql:latest
+    volumes:
+      - local:/var/lib/mysql
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: money
+      MYSQL_ROOT_PASSWORD: 732001
+volumes:
+  local:
+    driver: local
