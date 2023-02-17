@@ -15,8 +15,8 @@ public class UserInfo {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     @Column(name = "first_name", length = 50)
@@ -125,16 +125,5 @@ public class UserInfo {
     }
 
     public UserInfo() {
-    }
-
-    public String toJsonString() {
-        String result = "{";
-        result += "\"id\":" + id + ",";
-        result += "\"firstName\":" + firstName + ",";
-        result += "\"lastName\":" + lastName + ",";
-        result += "\"sex\":" + sex + ",";
-        result += "\"phoneNumber\":" + phoneNumber + ",";
-        result += "}";
-        return result;
     }
 }

@@ -1,6 +1,7 @@
 package com.hedspi.money.controller.admin;
 
 import com.hedspi.money.entity.UserInfo;
+import com.hedspi.money.repository.UserInfoRepository;
 import com.hedspi.money.request.UserInfoRequest;
 import com.hedspi.money.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -16,6 +18,8 @@ public class UserInfoController {
 
     @Autowired
     UserInfoService userInfoService;
+    @Autowired
+    private UserInfoRepository userInfoRepository;
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getUserInfoById(@PathVariable("id") int id) {
@@ -56,6 +60,19 @@ public class UserInfoController {
         UserInfo userInfo = userInfoService.getUserInfoById(id);
         if (userInfo != null) {
             userInfoService.delete(userInfo);
+        }
+    }
+
+    @GetMapping("")
+    public ResponseEntity<Object> getAllUserInfo() {
+        Map<String, Object> data = new HashMap<>();
+        List<UserInfo> userInfos = userInfoService.getAll();
+        if (userInfos.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            userInfos.forEach(UserInfo -> UserInfo.getUser().setPassword(null));
+            data.put("userInfos", userInfos);
+            return ResponseEntity.ok(data);
         }
     }
 }
