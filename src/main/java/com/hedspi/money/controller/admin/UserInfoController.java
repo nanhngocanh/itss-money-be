@@ -1,10 +1,9 @@
-package com.hedspi.money.controller.user;
+package com.hedspi.money.controller.admin;
 
 import com.hedspi.money.entity.UserInfo;
 import com.hedspi.money.request.UserInfoRequest;
 import com.hedspi.money.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/admin/user")
-public class UserTest {
+@RequestMapping("/api/admin/userInfo")
+public class UserInfoController {
 
     @Autowired
     UserInfoService userInfoService;
@@ -52,14 +51,11 @@ public class UserTest {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteUserInfo(@PathVariable("id") int id) {
+
+    public void deleteUserInfo(int id) {
         UserInfo userInfo = userInfoService.getUserInfoById(id);
-        if (userInfo == null) {
-            return ResponseEntity.notFound().build();
-        } else {
+        if (userInfo != null) {
             userInfoService.delete(userInfo);
-            return ResponseEntity.ok("{\"message\": \"Delete successfully\"}");
         }
     }
 }
