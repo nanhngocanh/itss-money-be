@@ -49,4 +49,9 @@ public class TransactionController {
         return ResponseEntity.ok("{\"message\": \"Thêm giao dịch thành công\"}");
     }
 
+    @DeleteMapping("/delete/{transaction_id}")
+    public ResponseEntity<Object> deleteTransaction(@PathVariable("transaction_id") int transactionId) {
+        transactionService.deleteTransaction(transactionId);
+        return ResponseEntity.ok("{\"message\": \"Xóa giao dịch thành công\"}");
+    }
 }

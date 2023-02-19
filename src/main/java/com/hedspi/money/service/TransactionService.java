@@ -25,4 +25,8 @@ public class TransactionService {
     public int getTotalAmount(int userId, int userCategoryId) {
         return transactionRepository.getTotalAmount(userId, userCategoryId);
     }
+
+    public void deleteTransaction(int transactionId) {
+        transactionRepository.deleteById(transactionId);
+    }
 }
