@@ -34,4 +34,14 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
             """,
             nativeQuery = true)
     int getTotalAmount(int userId, int userCategoryId);
+
+    @Modifying
+    @Transactional
+    @Query(value = """
+                        UPDATE transaction
+                        SET wallet_id = ?2, user_category_id = ?3, type = ?4, amount = ?5, note = ?6, create_at = ?7
+                        WHERE id = ?1
+            """,
+            nativeQuery = true)
+    void updateTransaction(Integer id, Integer walletId, Integer userCategoryId, Integer type, Integer amount, String note, String createAt);
 }

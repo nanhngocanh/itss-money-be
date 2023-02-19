@@ -49,6 +49,26 @@ public class TransactionController {
         return ResponseEntity.ok("{\"message\": \"Thêm giao dịch thành công\"}");
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<Object> updateTransaction(@RequestBody TransactionRequest transactionRequest) {
+        Transaction oldTransaction = transactionService.getTransactionById(transactionRequest.getId());
+        if (oldTransaction == null) {
+            return ResponseEntity.ok("{\"message\": \"Không tìm thấy giao dịch\"}");
+        }
+        transactionService.updateTransaction(transactionRequest);
+        int totalAmount = transactionService.getTotalAmount(transactionRequest.getUserId(),
+                transactionRequest.getUserCategoryId());
+        int budget = budgetService.getBudget(transactionRequest.getUserId(),
+                transactionRequest.getUserCategoryId());
+
+        walletService.updateAmount(oldTransaction.getWallet().getId(), -oldTransaction.getType() * oldTransaction.getAmount());
+        walletService.updateAmount(transactionRequest.getWalletId(), transactionRequest.getType() * transactionRequest.getAmount());
+        if (transactionRequest.getType() == -1 && budget > 0 && totalAmount > budget) {
+            return ResponseEntity.ok("{\"message\": \"Vượt hạn mức\"}");
+        }
+        return ResponseEntity.ok("{\"message\": \"Cập nhật giao dịch thành công\"}");
+    }
+
     @DeleteMapping("/delete/{transaction_id}")
     public ResponseEntity<Object> deleteTransaction(@PathVariable("transaction_id") int transactionId) {
         transactionService.deleteTransaction(transactionId);

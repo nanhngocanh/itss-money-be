@@ -26,7 +26,17 @@ public class TransactionService {
         return transactionRepository.getTotalAmount(userId, userCategoryId);
     }
 
+    public Transaction getTransactionById(int id) {
+        return transactionRepository.findById(id).isPresent() ? transactionRepository.findById(id).get() : null;
+    }
+
     public void deleteTransaction(int transactionId) {
         transactionRepository.deleteById(transactionId);
+    }
+
+    public void updateTransaction(TransactionRequest transactionRequest) {
+        transactionRepository.updateTransaction(transactionRequest.getId(), transactionRequest.getWalletId(),
+                transactionRequest.getUserCategoryId(), transactionRequest.getType(), transactionRequest.getAmount(),
+                transactionRequest.getNote(), transactionRequest.getCreateAt());
     }
 }

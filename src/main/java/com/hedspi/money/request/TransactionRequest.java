@@ -1,6 +1,7 @@
 package com.hedspi.money.request;
 
 public class TransactionRequest {
+    private Integer id = 0;
     private Integer userId;
     private Integer walletId;
 
@@ -64,5 +65,13 @@ public class TransactionRequest {
 
     public void setCreateAt(String createAt) {
         this.createAt = createAt;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
