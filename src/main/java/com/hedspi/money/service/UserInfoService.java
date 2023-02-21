@@ -28,4 +28,8 @@ public class UserInfoService {
     public List<UserInfo> getAll() {
         return userInfoRepository.findAll();
     }
+
+    public List<UserInfo> getAllUser() {
+        return userInfoRepository.getAllUser();
+    }
 }

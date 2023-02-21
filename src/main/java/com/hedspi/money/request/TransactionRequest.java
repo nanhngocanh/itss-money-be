@@ -11,6 +11,8 @@ public class TransactionRequest {
     private String note;
     private String createAt;
 
+    public TransactionRequest(){}
+
     public Integer getUserId() {
         return userId;
     }

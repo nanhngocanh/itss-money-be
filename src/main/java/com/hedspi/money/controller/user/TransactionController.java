@@ -71,6 +71,11 @@ public class TransactionController {
 
     @DeleteMapping("/delete/{transaction_id}")
     public ResponseEntity<Object> deleteTransaction(@PathVariable("transaction_id") int transactionId) {
+        Transaction oldTransaction = transactionService.getTransactionById(transactionId);
+        if (oldTransaction == null) {
+            return ResponseEntity.ok("{\"message\": \"Không tìm thấy giao dịch\"}");
+        }
+        walletService.updateAmount(oldTransaction.getWallet().getId(), -oldTransaction.getType() * oldTransaction.getAmount());
         transactionService.deleteTransaction(transactionId);
         return ResponseEntity.ok("{\"message\": \"Xóa giao dịch thành công\"}");
     }

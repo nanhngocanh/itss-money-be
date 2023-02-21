@@ -9,4 +9,6 @@ import java.util.List;
 
 @Repository
 public interface UserInfoRepository extends JpaRepository<UserInfo, Integer> {
+    @Query("select u from UserInfo u where u.user.role = 'user'")
+    List<UserInfo> getAllUser();
 }

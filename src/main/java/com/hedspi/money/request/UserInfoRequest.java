@@ -5,6 +5,17 @@ public class UserInfoRequest {
     private String last_name;
     private String sex;
     private String phone_number;
+    private String date_of_birth;
+
+    public UserInfoRequest(){}
+
+    public String getDate_of_birth() {
+        return date_of_birth;
+    }
+
+    public void setDate_of_birth(String date_of_birth) {
+        this.date_of_birth = date_of_birth;
+    }
 
     public String getFirst_name() {
         return first_name;

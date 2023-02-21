@@ -43,7 +43,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
     @Query(value = """
                         select sum(amount) as total_amount
                         from transaction
-                        where user_id = 2 and user_category_id = 1
+                        where user_id = ?1 and user_category_id = ?2
                         and date_format(create_at, '%Y-%m') = date_format(now(), '%Y-%m');
             """,
             nativeQuery = true)
