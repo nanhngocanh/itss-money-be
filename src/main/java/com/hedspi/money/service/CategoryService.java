@@ -5,6 +5,7 @@ import com.hedspi.money.repository.CategoryRepository;
 import com.hedspi.money.request.createResquest.CreateCategoryRequest;
 import com.hedspi.money.request.createResquest.CreateCommonCategoryRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -68,8 +69,8 @@ public class CategoryService {
     public List<Category> GetCommonCategory(){
         return categoryRepository.GetCommonCategory();
     }
-    public List<Category> GetUserCategory(Integer userId){
-        return categoryRepository.GetUserCategory(userId);
+    public List<Category> GetUserCategory(Integer userId, Integer type){
+        return categoryRepository.GetUserCategory(userId,type);
     }
     public List<Category> GetUserPrivateCategory(Integer userId){
         return categoryRepository.GetUserPrivateCategory(userId);

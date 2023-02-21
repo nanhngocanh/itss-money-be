@@ -18,8 +18,8 @@ public class UserCategoryController {
         return categoryService.GetUserPrivateCategory(userId);
     }
     @GetMapping("allCategory")
-    public List<Category> GetUserCategory(@RequestParam Integer userId){
-        return categoryService.GetUserCategory(userId);
+    public List<Category> GetUserCategory(@RequestParam Integer userId, @RequestParam Integer type){
+        return categoryService.GetUserCategory(userId,type);
     }
     @PostMapping("category")
     public Category CreateCategory( @RequestBody CreateCategoryRequest createCategoryRequest) {
