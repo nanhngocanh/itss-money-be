@@ -16,12 +16,13 @@ import java.util.List;
 public class BudgetService {
     @Autowired
     BudgetRepository budgetRepository;
-
+    @Autowired
+    CategoryRepository categoryRepository;
     public int getBudget(int userId, int categoryId) {
         Integer budget = budgetRepository.getBudget(userId, categoryId);
         return budget == null ? 0 : budget;
-    @Autowired
-    CategoryRepository categoryRepository;
+    }
+
     public Budget CreateBudget(CreateBudgetRequest createBudgetRequest) {
         Budget budget = new Budget();
         budget.setAmount(createBudgetRequest.getAmount());

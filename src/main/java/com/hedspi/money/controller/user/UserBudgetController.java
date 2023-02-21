@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/app/user")
+@RequestMapping("/api/user")
 public class UserBudgetController {
     @Autowired
     private BudgetService budgetService;
