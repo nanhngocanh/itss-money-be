@@ -3,7 +3,11 @@ package com.hedspi.money.repository;
 import com.hedspi.money.entity.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Integer> {
     @Query(value = "SELECT SUM(amount) FROM transaction WHERE user_id = :userId AND DAY(create_at) = :day AND MONTH(create_at) = :month AND YEAR(create_at) = :year AND TYPE = :type",nativeQuery = true)
     Integer getSumTransactionOfDayByType(Integer userId, Integer year, Integer month, Integer day, Integer type);
@@ -19,4 +23,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
 
 
 
+    @Query("SELECT t FROM Transaction t WHERE t.userId = ?1")
+    List<Transaction> findAllByUserId(int userId);
 }
