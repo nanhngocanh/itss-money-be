@@ -40,7 +40,8 @@ public class AuthService {
         return null;
     }
 
-    public void signup(RegisterRequest registerRequest){
+    public String signup(RegisterRequest registerRequest){
+        if (userRepository.getUserByEmail(registerRequest.getEmail()) != null) return "{\"message\":\"Email đã tồn tại, vui lòng thử lại sau!\"}";
         User user = new User();
         Wallet wallet = new Wallet();
         UserInfo userInfo = new UserInfo();
@@ -61,5 +62,6 @@ public class AuthService {
         wallet.setUserId(user.getId());
         wallet.setAmount(registerRequest.getAmount());
         walletRepository.save(wallet);
+        return "{\"message\":\"Đăng ký thành công!\"}";
     }
 }
