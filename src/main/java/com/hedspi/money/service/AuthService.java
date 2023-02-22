@@ -6,6 +6,7 @@ import com.hedspi.money.entity.Wallet;
 import com.hedspi.money.repository.UserInfoRepository;
 import com.hedspi.money.repository.UserRepository;
 import com.hedspi.money.repository.WalletRepository;
+import com.hedspi.money.request.auth.ChangePasswordRequest;
 import com.hedspi.money.request.auth.LoginRequest;
 import com.hedspi.money.request.auth.RegisterRequest;
 import com.hedspi.money.response.auth.LoginResponse;
@@ -63,5 +64,20 @@ public class AuthService {
         wallet.setAmount(registerRequest.getAmount());
         walletRepository.save(wallet);
         return "{\"message\":\"Đăng ký thành công!\"}";
+    }
+
+    public void sendNewPassword(){
+
+    }
+
+    public String changePass(ChangePasswordRequest changePasswordRequest){
+        User user = userRepository.findById(changePasswordRequest.getUserId()).get();
+        if (user == null) return "{\"message\":\"Không tìm thấy người dùng!\"}";
+        if (passwordEncoder.matches(changePasswordRequest.getOldPass(),user.getPassword())){
+            user.setPassword(passwordEncoder.encode(changePasswordRequest.getNewPass()));
+            userRepository.save(user);
+            return "{\"message\":\"Thay đổi mật khẩu thành công!\"}";
+        }
+        return "{\"message\":\"Mật khẩu cũ không chính xác. Vui lòng nhập lại!\"}";
     }
 }
