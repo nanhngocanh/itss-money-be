@@ -30,7 +30,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
     Integer getSumTransactionOfYearByTypeAndCategory(Integer userId, Integer year, Integer type, Integer categoryId);
 
 
-    @Query("SELECT t FROM Transaction t WHERE t.userId = ?1")
+    @Query("SELECT t FROM Transaction t WHERE t.userId = ?1 order by t.createAt desc")
     List<Transaction> findAllByUserId(int userId);
 
     @Modifying

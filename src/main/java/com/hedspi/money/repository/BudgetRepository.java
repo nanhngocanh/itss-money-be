@@ -28,7 +28,7 @@ public interface BudgetRepository extends JpaRepository<Budget, Integer> {
             nativeQuery = true)
     Integer getBudget(int userId, int categoryId);
     //loi can sua
-    @Query("select b from Budget b where b.userId = :userId")
+    @Query("select b from Budget b where b.userId = :userId order by b.budgetTime desc")
     List<Budget> GetUserBudget(Integer userId);
     @Query("SELECT coalesce(MAX(b.id), 0) FROM Budget b")
     int GetMaxBudgetId();

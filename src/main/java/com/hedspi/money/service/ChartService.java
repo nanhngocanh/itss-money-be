@@ -1,9 +1,12 @@
 package com.hedspi.money.service;
 
+import com.hedspi.money.entity.Category;
 import com.hedspi.money.repository.BudgetRepository;
+import com.hedspi.money.repository.CategoryRepository;
 import com.hedspi.money.repository.TransactionRepository;
 import com.hedspi.money.request.ChartRequest;
 import com.hedspi.money.response.BarChartResponse;
+import com.hedspi.money.response.PieChartResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,8 @@ public class ChartService {
     private TransactionRepository transactionRepository;
     @Autowired
     private BudgetRepository budgetRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     public BarChartResponse getBarChart(ChartRequest chartRequest){
         if (chartRequest.getIn().equals("year")) return barChartInYear(chartRequest);
@@ -77,5 +82,26 @@ public class ChartService {
         if (value == null) {
             arr.add(0);
         } else arr.add(value);
+    }
+    
+    public PieChartResponse pie(ChartRequest chartRequest){
+        PieChartResponse pieChartResponse = new PieChartResponse();
+        Integer num;
+        List<String> label = new ArrayList<>();
+        List<Integer> data = new ArrayList<>();
+        List<Category> categories = categoryRepository.GetUserCategory(chartRequest.getUserId(),chartRequest.getType());
+        for (Category cat:
+                categories) {
+            if (chartRequest.getIn().equals("year")){
+                num = transactionRepository.getSumTransactionOfYearByTypeAndCategory(chartRequest.getUserId(),chartRequest.getYear(),chartRequest.getType(),cat.getId());
+            } else num = transactionRepository.getSumTransactionOfMonthByTypeAndCategory(chartRequest.getUserId(),chartRequest.getYear(),chartRequest.getMonth(),chartRequest.getType(),cat.getId());
+            if (num!=null) {
+                label.add(cat.getName());
+                data.add(num);
+            }
+        }
+        pieChartResponse.setLabels(label);
+        pieChartResponse.setData(data);
+        return pieChartResponse;
     }
 }
