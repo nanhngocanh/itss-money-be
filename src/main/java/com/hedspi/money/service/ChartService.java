@@ -35,17 +35,17 @@ public class ChartService {
         List<Integer> amount = new ArrayList<>();
         List<Integer> budget = new ArrayList<>();
         List<String> labels = new ArrayList<>();
-        String month = chartRequest.getMonth() + "";
-        if (chartRequest.getMonth() < 10) month = "0" + chartRequest.getMonth();
-        System.out.println(month);
+        String month;
         if (chartRequest.getCategoryId().equals(0)){
             for (int i = 1; i <= 12; i++) {
+                if (i < 10) month = "0" + i; else month = ""+i;
                 labels.add("T"+i);
                 addItem(amount,transactionRepository.getSumTransactionOfMonthByType(chartRequest.getUserId(),chartRequest.getYear(),i,chartRequest.getType()));
                 addItem(budget, budgetRepository.getSumBudgetInMonth(chartRequest.getUserId(),chartRequest.getYear() + "-" + month));
             }
         } else {
             for (int i = 1; i <= 12; i++) {
+                if (i < 10) month = "0" + i; else month = ""+i;
                 labels.add("T"+i);
                 addItem(amount,transactionRepository.getSumTransactionOfMonthByTypeAndCategory(chartRequest.getUserId(),chartRequest.getYear(),i,chartRequest.getType(),chartRequest.getCategoryId()));
                 addItem(budget, budgetRepository.getSumBudgetInMonthByCategory(chartRequest.getUserId(), chartRequest.getYear()+"-"+month,chartRequest.getCategoryId()));
