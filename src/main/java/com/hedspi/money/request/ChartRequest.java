@@ -5,7 +5,7 @@ public class ChartRequest {
     private Integer type;
     private String in;
     private Integer year;
-    private Integer month;
+    private Integer month = 0;
     private Integer categoryId = 1;
 
     public ChartRequest(Integer userId, Integer type, String in, Integer year, Integer month, Integer categoryId) {

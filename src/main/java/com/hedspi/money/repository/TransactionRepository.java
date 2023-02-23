@@ -2,6 +2,7 @@ package com.hedspi.money.repository;
 
 import com.hedspi.money.entity.Transaction;
 import com.hedspi.money.request.TransactionRequest;
+import com.hedspi.money.response.AmountOfCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -25,6 +26,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
     @Query(value = "SELECT SUM(amount) FROM transaction WHERE user_id = :userId AND MONTH(create_at) = :month AND YEAR(create_at) = :year AND TYPE = :type AND user_category_id = :categoryId",nativeQuery = true)
     Integer getSumTransactionOfMonthByTypeAndCategory(Integer userId, Integer year, Integer month, Integer type, Integer categoryId);
 
+    @Query(value = "SELECT SUM(amount) FROM transaction WHERE user_id = :userId AND YEAR(create_at) = :year AND TYPE = :type AND user_category_id = :categoryId",nativeQuery = true)
+    Integer getSumTransactionOfYearByTypeAndCategory(Integer userId, Integer year, Integer type, Integer categoryId);
 
 
     @Query("SELECT t FROM Transaction t WHERE t.userId = ?1")
@@ -47,7 +50,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
                         and date_format(create_at, '%Y-%m') = date_format(now(), '%Y-%m');
             """,
             nativeQuery = true)
-    int getTotalAmount(int userId, int userCategoryId);
+    Integer getTotalAmount(int userId, int userCategoryId);
 
     @Modifying
     @Transactional
@@ -58,4 +61,5 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
             """,
             nativeQuery = true)
     void updateTransaction(Integer id, Integer walletId, Integer userCategoryId, Integer type, Integer amount, String note, String createAt);
+
 }

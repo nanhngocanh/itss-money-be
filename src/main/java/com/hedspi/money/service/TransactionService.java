@@ -23,7 +23,9 @@ public class TransactionService {
     }
 
     public int getTotalAmount(int userId, int userCategoryId) {
-        return transactionRepository.getTotalAmount(userId, userCategoryId);
+        Integer num = transactionRepository.getTotalAmount(userId, userCategoryId);
+        if(num==null)return 0;
+        return num;
     }
 
     public Transaction getTransactionById(int id) {
